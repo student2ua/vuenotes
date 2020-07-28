@@ -1,0 +1,22 @@
+import Vue from "vue";
+import VueRouter from "vue-router";
+import DashboardLayout from "../layout/DashboardLayout.vue"
+Vue.use(VueRouter);
+const routes =[{
+    path:"/home",
+    component:DashboardLayout,
+    children:[{
+        path:"/notes",
+        name:"Notes",
+        component:()=>import(/* webpackChunkName: "home" */"../views/Home.vue")
+    }]
+},{
+    path: "/",
+    redirect:{name:"Notes"}
+}];
+const router=new VueRouter({
+    mode:"history",
+    base:process.env.BASE_URL,
+    routes
+})        ;
+export default router;
